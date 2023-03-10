@@ -65,6 +65,33 @@ def make_ployly_mesh3d(
     return trace
 
 
+def import_geometry_filename(filenames):
+    c = []
+    for filename in filenames:
+        traces = create_mesh_data_filename(filename)
+        c.extend(traces)
+    return c
+
+def create_mesh_data_filename(filename):
+    """
+    Create mesh-for-plotly from single obj file
+    """
+
+    data = []
+    wav_objs = wav_obj.WavObject.read_obj_filename(filename)
+
+    for i, obj in enumerate(wav_objs):
+        mesh = make_ployly_mesh3d(
+            obj.vertices,
+            obj.faces,
+            name = obj.name,
+            facecolors = obj.face_colors,
+            opacity = obj.opacities[0],
+            vertexcolor = obj.vertice_colors,
+        )
+        data.append(mesh)
+
+    return data
 
 
 def import_geometry(obj_names : List[str], path = _config.GEOMETRY_DIR):

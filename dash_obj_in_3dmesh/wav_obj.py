@@ -147,6 +147,10 @@ class WavObject():
         full_filepath = os.path.join(_config.DATA_PATH,obj_dir,component_name + ".obj")
 
         return WavObject._read_objfile(full_filepath,split)
+    
+    @staticmethod
+    def read_obj_filename(filename):
+        return WavObject._read_objfile(filename)
 
 
 
